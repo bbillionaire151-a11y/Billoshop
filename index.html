@@ -1,1 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BILLO SHOP - Premium Store, Data & Odds</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .hide { display: none !important; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 shadow-lg">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="goToHome()">
+                <div class="bg-gradient-to-r from-pink-500 to-violet-600 p-2 rounded-xl text-white font-black text-xl shadow-md">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-pink-400 via-purple-300 to-indigo-400 bg-clip-text text-transparent">BILLO SHOP</h1>
+                    <span class="text-[10px] text-emerald-400 font-semibold tracking-widest uppercase">⚡ Fast Delivery & Data</span>
+                </div>
+            </div>
+
+            <!-- Header Action Icons -->
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <button onclick="openFavoritesModal()" class="relative p-2 bg-slate-800 hover:bg-slate-700 rounded-full transition text-pink-400" title="Favorites">
+                    <i class="fa-solid fa-heart text-lg"></i>
+                    <span id="favCountBadge" class="absolute -top-1 -right-1 bg-pink-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center hide">0</span>
+                </button>
+                <button onclick="openCartModal()" class="relative p-2 bg-slate-800 hover:bg-slate-700 rounded-full transition text-indigo-400" title="Cart">
+                    <i class="fa-solid fa-cart-shopping text-lg"></i>
+                    <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-indigo-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center hide">0</span>
+                </button>
+                <button onclick="openAccountModal()" class="p-2 bg-slate-800 hover:bg-slate-700 rounded-full transition text-cyan-400" title="My Account">
+                    <i class="fa-solid fa-user text-lg"></i>
+                </button>
+                <button onclick="openAdminModal()" class="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-slate-950 font-bold text-xs rounded-lg shadow transition flex items-center space-x-1.5">
+                    <i class="fa-solid fa-lock"></i>
+                    <span class="hidden sm:inline">Admin Portal</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6">
+
+        <!-- SECTION 0: WELCOME & LANDING SELECTOR -->
+        <div id="viewLanding" class="space-y-8 py-6">
+            <div class="text-center space-y-4 max-w-2xl mx-auto">
+                <span class="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 rounded-full text-xs font-bold uppercase tracking-widest">Welcome to Billo Shop</span>
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-200 bg-clip-text text-transparent">Your Ultimate One-Stop Digital & Lifestyle Hub</h2>
+                <p class="text-slate-400 text-sm sm:text-base">Shop trending items, get instant MTN & Telecel data bundles, or unlock VIP football betting booking codes instantly!</p>
+                <button onclick="showMainSelector()" class="mt-4 px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:from-pink-600 hover:to-indigo-700 text-white font-bold text-lg rounded-2xl shadow-xl shadow-indigo-500/20 transform hover:-translate-y-0.5 transition flex items-center justify-center mx-auto space-x-3">
+                    <span>GET STARTED</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Feature Highlights Banner -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                <div onclick="openShopSection()" class="group cursor-pointer bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 hover:border-pink-500/50 p-6 rounded-3xl transition duration-300 shadow-lg">
+                    <div class="w-12 h-12 bg-pink-500/20 text-pink-400 rounded-2xl flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-pink-400 transition">GO TO SHOP PRODUCTS 🛍️🛒</h3>
+                    <p class="text-slate-400 text-sm">Clothes, shoes, jewelry, electronics, accessories & more with secure MoMo checkout.</p>
+                </div>
+                <div onclick="openDataSection()" class="group cursor-pointer bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 hover:border-indigo-500/50 p-6 rounded-3xl transition duration-300 shadow-lg">
+                    <div class="w-12 h-12 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-wifi"></i></div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-indigo-400 transition">GO TO BUY DATA BUNDLE 🛜</h3>
+                    <p class="text-slate-400 text-sm">Instant MTN & Telecel data packages delivered straight to your recipient phone number.</p>
+                </div>
+                <div onclick="openBookingSection()" class="group cursor-pointer bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 hover:border-amber-500/50 p-6 rounded-3xl transition duration-300 shadow-lg">
+                    <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-ticket"></i></div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-amber-400 transition">GET BOOKING CODE 🎟️</h3>
+                    <p class="text-slate-400 text-sm">Unlock daily verified booking codes and join our exclusive VIP WhatsApp channel.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: E-COMMERCE SHOP -->
+        <div id="viewShop" class="hide space-y-6">
+            <!-- Back & Header Controls -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <button onclick="goToHome()" class="flex items-center space-x-2 text-slate-400 hover:text-white transition w-fit px-3 py-1.5 bg-slate-800 rounded-xl">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="text-sm font-semibold">Back to Home</span>
+                </button>
+                <div class="relative flex-1 max-w-md">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400"></i>
+                    <input type="text" id="shopSearchInput" oninput="filterShopProducts()" placeholder="Search clothes, shoes, accessories..." class="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-2xl focus:outline-none focus:border-pink-500 text-sm">
+                </div>
+            </div>
+
+            <!-- Categories Bar -->
+            <div class="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-thin">
+                <button onclick="setCategory('all')" id="cat-all" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-pink-500 text-white shadow">All Products</button>
+                <button onclick="setCategory('clothes')" id="cat-clothes" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-slate-300">Clothes</button>
+                <button onclick="setCategory('shoes')" id="cat-shoes" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-slate-300">Shoes</button>
+                <button onclick="setCategory('accessories')" id="cat-accessories" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-slate-300">Accessories</button>
+                <button onclick="setCategory('jewelry')" id="cat-jewelry" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-slate-300">Jewelry</button>
+                <button onclick="setCategory('foods')" id="cat-foods" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-slate-300">Foods</button>
+                <button onclick="setCategory('furniture')" id="cat-furniture" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-slate-300">Furniture</button>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="shopProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Dynamically rendered by JS -->
+            </div>
+        </div>
+
+        <!-- SECTION 2: DATA BUNDLE STORE -->
+        <div id="viewData" class="hide space-y-6 max-w-4xl mx-auto">
+            <div class="flex items-center justify-between">
+                <button onclick="goToHome()" class="flex items-center space-x-2 text-slate-400 hover:text-white transition w-fit px-3 py-1.5 bg-slate-800 rounded-xl">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="text-sm font-semibold">Back to Home</span>
+                </button>
+                <span class="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 rounded-xl text-xs font-bold"><i class="fa-solid fa-bolt mr-1.5"></i>NB: 30min - 1hr Delivery</span>
+            </div>
+
+            <div class="text-center space-y-2">
+                <h2 class="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Fast Data Bundle Vending</h2>
+                <p class="text-slate-400 text-sm">Select your network provider and bundle package below.</p>
+            </div>
+
+            <!-- Network Selection Tabs -->
+            <div class="grid grid-cols-3 gap-3">
+                <button onclick="selectNetwork('MTN')" id="net-MTN" class="net-tab py-3.5 px-4 rounded-2xl bg-gradient-to-r from-yellow-500 to-amber-600 text-slate-950 font-extrabold text-sm shadow-lg flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-signal"></i>
+                    <span>MTN DATA</span>
+                </button>
+                <button onclick="selectNetwork('TELECEL')" id="net-TELECEL" class="net-tab py-3.5 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-extrabold text-sm flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-wifi"></i>
+                    <span>TELECEL</span>
+                </button>
+                <button onclick="selectNetwork('TIGO')" id="net-TIGO" class="net-tab py-3.5 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-extrabold text-sm flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-tower-cell"></i>
+                    <span>AT (TIGO)</span>
+                </button>
+            </div>
+
+            <!-- Network Content Area -->
+            <div id="networkPackagesContainer" class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 shadow-xl">
+                <!-- Dynamic package cards rendered here -->
+            </div>
+        </div>
+
+        <!-- SECTION 3: BOOKING CODE PORTAL -->
+        <div id="viewBooking" class="hide space-y-6 max-w-xl mx-auto">
+            <div class="flex items-center justify-between">
+                <button onclick="goToHome()" class="flex items-center space-x-2 text-slate-400 hover:text-white transition w-fit px-3 py-1.5 bg-slate-800 rounded-xl">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="text-sm font-semibold">Back to Home</span>
+                </button>
+            </div>
+
+            <div id="bookingLockedCard" class="bg-slate-900/90 border border-amber-500/40 rounded-3xl p-8 text-center space-y-6 shadow-2xl">
+                <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-3xl flex items-center justify-center text-2xl mx-auto shadow-inner">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="space-y-2">
+                    <h2 class="text-2xl font-black text-white">VIP Daily Booking Codes</h2>
+                    <p class="text-amber-300 font-bold text-sm bg-amber-500/10 py-2 px-4 rounded-xl border border-amber-500/20 inline-block">¢30 IS REQUIRED TO PAY TO UNLOCK ODDS</p>
+                    <p class="text-slate-400 text-xs mt-2">Get high-accuracy football betting tips and booking codes updated daily by professional analysts.</p>
+                </div>
+                <button onclick="payForBookingCode()" class="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-slate-950 font-extrabold rounded-2xl shadow-lg transition">
+                    PAY ¢30 TO UNLOCK ODDS NOW
+                </button>
+            </div>
+
+            <div id="bookingUnlockedCard" class="hide bg-slate-900/90 border border-emerald-500/40 rounded-3xl p-8 text-center space-y-6 shadow-2xl">
+                <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-3xl flex items-center justify-center text-2xl mx-auto shadow-inner">
+                    <i class="fa-solid fa-check-to-slot"></i>
+                </div>
+                <div class="space-y-3">
+                    <h2 class="text-2xl font-black text-white">Payment Verified & Approved! 🎉</h2>
+                    <p class="text-slate-300 text-sm">Join our official VIP WhatsApp channel below to receive your everyday odds instantly.</p>
+                    <a href="https://chat.whatsapp.com/IMM8W4PdGrvC1gJcwYF2VL" target="_blank" class="inline-flex items-center justify-center space-x-2 w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold rounded-2xl shadow-lg transition">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>JOIN WHATSAPP CHANNEL</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 py-6 px-4 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <p>&copy; 2026 BILLO SHOP. All rights reserved.</p>
+            <div class="flex items-center space-x-4">
+                <a href="https://wa.me/233543486248" target="_blank" class="hover:text-emerald-400 transition flex items-center space-x-1"><i class="fa-brands fa-whatsapp text-emerald-400"></i><span>Admin WhatsApp (+233 54 348 6248)</span></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL: PRODUCT DETAIL -->
+    <div id="productDetailModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hide flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-200">
+            <div class="relative h-64 bg-slate-800">
+                <img id="modalProductImg" src="" alt="Product" class="w-full h-full object-cover">
+                <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-slate-900/80 hover:bg-slate-900 text-white w-9 h-9 rounded-full flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <span id="modalProductCat" class="px-3 py-1 bg-pink-500/10 text-pink-400 rounded-xl text-xs font-bold uppercase"></span>
+                    <span id="modalProductPrice" class="text-2xl font-black text-emerald-400"></span>
+                </div>
+                <h3 id="modalProductTitle" class="text-xl font-bold text-white"></h3>
+                <p id="modalProductDesc" class="text-slate-300 text-sm leading-relaxed"></p>
+                
+                <!-- Reviews Simulated Section -->
+                <div class="bg-slate-800/50 p-3 rounded-2xl border border-slate-700/50 flex items-center space-x-3 text-xs text-slate-300">
+                    <div class="text-amber-400"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <span>Verified Jumia/Temu Quality &bull; 4.9/5 Rating (124 Reviews)</span>
+                </div>
+
+                <div class="flex space-x-3 pt-2">
+                    <button onclick="toggleFavoriteCurrent()" id="modalFavBtn" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-2xl transition flex items-center justify-center space-x-2">
+                        <i class="fa-regular fa-heart"></i>
+                        <span>Favorite</span>
+                    </button>
+                    <button onclick="addToCartFromModal()" class="flex-1 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold rounded-2xl transition flex items-center justify-center space-x-2 shadow-lg">
+                        <i class="fa-solid fa-cart-plus"></i>
+                        <span>Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CART & CHECKOUT -->
+    <div id="cartModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hide flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+            <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+                <h3 class="font-bold text-lg text-white flex items-center space-x-2"><i class="fa-solid fa-cart-shopping text-indigo-400"></i><span>Your Shopping Cart</span></h3>
+                <button onclick="closeCartModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div id="cartItemsList" class="p-4 overflow-y-auto flex-1 space-y-3">
+                <!-- Cart items rendered here -->
+            </div>
+            <div id="cartFooter" class="p-4 border-t border-slate-800 bg-slate-900/50 space-y-3">
+                <div class="flex items-center justify-between font-bold text-base">
+                    <span>Total Amount:</span>
+                    <span id="cartTotalPrice" class="text-emerald-400">¢0.00</span>
+                </div>
+                <button onclick="proceedToCheckout()" id="checkoutBtn" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 text-slate-950 font-extrabold rounded-2xl shadow transition">
+                    PROCEED TO CHECKOUT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CHECKOUT & PAYMENT INSTRUCTIONS -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hide flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <h3 class="font-bold text-lg text-white"><i class="fa-solid fa-credit-card text-emerald-400 mr-2"></i><span>Complete Your Order</span></h3>
+                <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <!-- Step 1: User Info Form -->
+            <div id="checkoutStepDetails" class="space-y-4">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-indigo-400">1. Fill In Your Delivery Details</h4>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Full Name</label>
+                        <input type="text" id="orderName" placeholder="e.g. Kofi Ofori" class="w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-sm focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Delivery Location / Address</label>
+                        <input type="text" id="orderLocation" placeholder="e.g. Winneba Junction, Main Street" class="w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-sm focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Phone Number</label>
+                        <input type="tel" id="orderPhone" placeholder="e.g. 0542021230" class="w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-sm focus:border-emerald-500 focus:outline-none">
+                    </div>
+                </div>
+                <button onclick="saveAddressAndContinue()" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 font-bold rounded-xl text-white transition shadow">
+                    SAVE ADDRESS & CONTINUE TO PAYMENT
+                </button>
+            </div>
+
+            <!-- Step 2: Payment Instructions -->
+            <div id="checkoutStepPayment" class="hide space-y-4">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-emerald-400">2. Select Payment Method (MTN MoMo)</h4>
+                <div class="bg-slate-800/70 border border-slate-700 p-4 rounded-2xl space-y-3 text-xs sm:text-sm">
+                    <p class="font-bold text-amber-300">FOLLOW THIS PROMPT TO MAKE PAYMENTS:</p>
+                    <ol class="list-decimal list-inside space-y-1.5 text-slate-300">
+                        <li>Dial <strong class="text-white">*170#</strong></li>
+                        <li>Select option <strong class="text-white">1</strong> (Transfer Money / MoMo)</li>
+                        <li>Select option <strong class="text-white">1</strong> (Send Money)</li>
+                        <li>Enter the recipient number: <strong class="text-emerald-400">0542021230</strong></li>
+                        <li>Enter exact amount: <strong id="paymentPromptAmount" class="text-emerald-400">¢0.00</strong></li>
+                        <li>Confirm payment with your PIN</li>
+                    </ol>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-widest">3. Take a screenshot of payment and submit it:</label>
+                    <div class="border-2 border-dashed border-slate-700 hover:border-emerald-500 rounded-2xl p-6 text-center cursor-pointer bg-slate-800/40 transition" onclick="document.getElementById('paymentScreenshotInput').click()">
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-emerald-400 mb-2"></i>
+                        <p id="screenshotFileName" class="text-xs text-slate-300 font-semibold">Click here to submit payment screenshot from Gallery 📸</p>
+                        <input type="file" id="paymentScreenshotInput" accept="image/*" class="hide" onchange="handleScreenshotUpload(event)">
+                    </div>
+                </div>
+
+                <button onclick="submitOrderFinal()" id="submitOrderFinalBtn" disabled class="w-full py-3.5 bg-slate-700 text-slate-400 font-bold rounded-xl transition cursor-not-allowed">
+                    SUBMIT PAYMENT & PLACE ORDER
+                </button>
+            </div>
+
+            <!-- Step 3: Success Screen -->
+            <div id="checkoutStepSuccess" class="hide text-center space-y-6 py-6">
+                <div class="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-3xl flex items-center justify-center text-3xl mx-auto shadow-inner">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="text-2xl font-black text-white">THANK YOU FOR SHOPPING WITH US!</h3>
+                    <p class="text-emerald-400 font-bold text-sm">YOUR ORDER HAS BEEN APPROVED</p>
+                    <p class="text-slate-400 text-xs">Expect your order in 5-7 days. We have sent your order details to the admin portal.</p>
+                </div>
+                <button onclick="finishAndReset()" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition">
+                    BACK TO HOME
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: FAVORITES -->
+    <div id="favoritesModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hide flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+            <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+                <h3 class="font-bold text-lg text-white flex items-center space-x-2"><i class="fa-solid fa-heart text-pink-400"></i><span>Your Favorite Items</span></h3>
+                <button onclick="closeFavoritesModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div id="favoritesItemsList" class="p-4 overflow-y-auto flex-1 space-y-3">
+                <!-- Favorites rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: MY ACCOUNT / PAST PURCHASES -->
+    <div id="accountModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hide flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <h3 class="font-bold text-lg text-white flex items-center space-x-2"><i class="fa-solid fa-user-gear text-cyan-400"></i><span>My Account & Past Purchases</span></h3>
+                <button onclick="closeAccountModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <!-- Admin WhatsApp Direct Link -->
+            <div class="bg-gradient-to-r from-emerald-900/40 to-slate-900 border border-emerald-500/30 p-4 rounded-2xl flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center text-lg"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white">Need Support or Custom Order?</h4>
+                        <p class="text-xs text-slate-400">Chat directly with Admin (+233 54 348 6248)</p>
+                    </div>
+                </div>
+                <a href="https://wa.me/233543486248" target="_blank" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs rounded-xl transition">Chat Now</a>
+            </div>
+
+            <!-- Past Purchases List -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-cyan-400">Your Order History</h4>
+                <div id="userOrderHistoryList" class="space-y-2">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: ADMIN PORTAL -->
+    <div id="adminModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-sm hide flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-amber-500/50 rounded-3xl max-w-4xl w-full max-h-[95vh] flex flex-col overflow-hidden shadow-2xl">
+            <div class="p-4 bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 flex items-center justify-between">
+                <h3 class="font-black text-lg flex items-center space-x-2"><i class="fa-solid fa-shield-halved"></i><span>ADMIN PORTAL - BILLO SHOP CONTROL PANEL</span></h3>
+                <button onclick="closeAdminModal()" class="text-slate-950 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto flex-1 space-y-8">
+                <!-- Admin Tabs -->
+                <div class="flex space-x-2 border-b border-slate-800 pb-4">
+                    <button onclick="switchAdminTab('orders')" id="admTab-orders" class="adm-tab px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950">Customer Orders (<span id="adminOrderCount">0</span>)</button>
+                    <button onclick="switchAdminTab('products')" id="admTab-products" class="adm-tab px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700">Manage Shop Products</button>
+                    <button onclick="switchAdminTab('bundles')" id="admTab-bundles" class="adm-tab px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700">Manage Data Prices</button>
+                </div>
+
+                <!-- TAB 1: ORDERS -->
+                <div id="adminPanelOrders" class="space-y-4">
+                    <h4 class="text-sm font-bold text-amber-400 uppercase tracking-widest">Incoming Customer Orders & Status</h4>
+                    <div id="adminOrdersList" class="space-y-3">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- TAB 2: PRODUCTS -->
+                <div id="adminPanelProducts" class="hide space-y-6">
+                    <div class="bg-slate-800/60 p-5 rounded-2xl border border-slate-700 space-y-4">
+                        <h4 class="text-sm font-bold text-pink-400 uppercase tracking-widest"><i class="fa-solid fa-plus-circle mr-1"></i> Post New Item / Edit Product</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Product Title</label>
+                                <input type="text" id="newProdTitle" placeholder="e.g. Nike Air Max Sneakers" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Category</label>
+                                <select id="newProdCat" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm">
+                                    <option value="clothes">Clothes</option>
+                                    <option value="shoes">Shoes</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="jewelry">Jewelry</option>
+                                    <option value="foods">Foods</option>
+                                    <option value="furniture">Furniture</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Price (¢)</label>
+                                <input type="number" id="newProdPrice" placeholder="150.00" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Image URL (Jumia/Temu style)</label>
+                                <input type="url" id="newProdImg" placeholder="https://images.unsplash.com/..." class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Item Description & Reviews info</label>
+                            <textarea id="newProdDesc" rows="2" placeholder="Premium quality imported material..." class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm"></textarea>
+                        </div>
+                        <button onclick="addNewProduct()" class="px-6 py-2.5 bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs rounded-xl transition shadow">
+                            PUBLISH EDITING / POST ITEM TO LIVE SHOP 🚀
+                        </button>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400">Currently Live Products</h4>
+                        <div id="adminProductList" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <!-- Rendered by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: BUNDLES -->
+                <div id="adminPanelBundles" class="hide space-y-4">
+                    <h4 class="text-sm font-bold text-indigo-400 uppercase tracking-widest">Update Data Bundle Prices (MTN & Telecel)</h4>
+                    <p class="text-xs text-slate-400">Make changes here and click save to instantly update pricing on the user data purchase screen.</p>
+                    <div id="adminBundlePricesEditor" class="space-y-3">
+                        <!-- Rendered by JS -->
+                    </div>
+                    <button onclick="saveBundlePrices()" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl transition shadow">
+                        PUBLISH BUNDLE PRICE EDITS 💾
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // --- INITIAL DATA STORE ---
+        const defaultProducts = [
+            { id: 1, title: "Designer Oversized Hoodie", category: "clothes", price: 180, image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80", desc: "High quality imported oversized streetwear hoodie. Super warm and soft." },
+            { id: 2, title: "Nike Air Jordan High Sneakers", category: "shoes", price: 350, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80", desc: "Top-tier fashion sneakers inspired by Jumia & Temu trending releases." },
+            { id: 3, title: "Luxury Stainless Steel Wristwatch", category: "accessories", price: 220, image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80", desc: "Water-resistant luxury men's wristwatch with gleaming gold accents." },
+            { id: 4, title: "Cuban Link Gold Necklace & Bracelet", category: "jewelry", price: 150, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", desc: "Non-tarnish 18k gold plated Cuban link chain set." },
+            { id: 5, title: "Wireless Bluetooth Bass Earbuds", category: "accessories", price: 120, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80", desc: "Crystal clear sound with long-lasting battery case." },
+            { id: 6, title: "Smart Ergonomic Office Chair", category: "furniture", price: 650, image: "https://images.unsplash.com/photo-1580481077494-e3299ac25e94?auto=format&fit=crop&w=600&q=80", desc: "Comfortable mesh office and gaming chair with lumbar support." }
+        ];
+
+        let defaultMtnBundles = [
+            { gb: "1gb", price: 4.80 },
+            { gb: "2gb", price: 9.50 },
+            { gb: "3gb", price: 14.50 },
+            { gb: "4gb", price: 17.50 },
+            { gb: "5gb", price: 22.50 },
+            { gb: "6gb", price: 25.00 },
+            { gb: "8gb", price: 33.50 },
+            { gb: "10gb", price: 42.00 },
+            { gb: "15gb", price: 62.00 },
+            { gb: "20gb", price: 82.00 },
+            { gb: "25gb", price: 98.00 },
+            { gb: "30gb", price: 121.00 },
+            { gb: "40gb", price: 161.00 },
+            { gb: "50gb", price: 200.00 }
+        ];
+
+        let defaultTelecelBundles = [
+            { gb: "10gb", price: 40.00 },
+            { gb: "15gb", price: 56.00 },
+            { gb: "20gb", price: 75.00 },
+            { gb: "25gb", price: 92.00 },
+            { gb: "30gb", price: 110.00 },
+            { gb: "35gb", price: 132.00 },
+            { gb: "40gb", price: 145.00 },
+            { gb: "45gb", price: 157.00 },
+            { gb: "50gb", price: 180.00 },
+            { gb: "100gb", price: 400.00 }
+        ];
+
+        // Load from LocalStorage or initialize
+        let products = JSON.parse(localStorage.getItem('billo_products')) || defaultProducts;
+        let mtnBundles = JSON.parse(localStorage.getItem('billo_mtn')) || defaultMtnBundles;
+        let telecelBundles = JSON.parse(localStorage.getItem('billo_telecel')) || defaultTelecelBundles;
+        let cart = JSON.parse(localStorage.getItem('billo_cart')) || [];
+        let favorites = JSON.parse(localStorage.getItem('billo_favs')) || [];
+        let orders = JSON.parse(localStorage.getItem('billo_orders')) || [];
+
+        let currentCategory = 'all';
+        let currentSelectedProduct = null;
+        let activeDataNetwork = 'MTN';
+        let currentCheckoutTotal = 0;
+        let screenshotUploaded = false;
+
+        // --- NAVIGATION & VIEWS ---
+        function goToHome() {
+            hideAllViews();
+            document.getElementById('viewLanding').classList.remove('hide');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showMainSelector() {
+            const firstShop = document.querySelector('#viewLanding');
+            firstShop.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openShopSection() {
+            hideAllViews();
+            document.getElementById('viewShop').classList.remove('hide');
+            renderShopProducts();
+        }
+
+        function openDataSection() {
+            hideAllViews();
+            document.getElementById('viewData').classList.remove('hide');
+            renderDataPackages();
+        }
+
+        function openBookingSection() {
+            hideAllViews();
+            document.getElementById('viewBooking').classList.remove('hide');
+        }
+
+        function hideAllViews() {
+            document.getElementById('viewLanding').classList.add('hide');
+            document.getElementById('viewShop').classList.add('hide');
+            document.getElementById('viewData').classList.add('hide');
+            document.getElementById('viewBooking').classList.add('hide');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- SHOP & PRODUCTS LOGIC ---
+        function renderShopProducts() {
+            const grid = document.getElementById('shopProductGrid');
+            const searchVal = document.getElementById('shopSearchInput').value.toLowerCase();
+            
+            let filtered = products.filter(p => {
+                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchesSearch = p.title.toLowerCase().includes(searchVal) || p.category.toLowerCase().includes(searchVal) || p.desc.toLowerCase().includes(searchVal);
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">No products found matching your search.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => {
+                const isFav = favorites.some(f => f.id === p.id);
+                return `
+                    <div class="bg-slate-900 border border-slate-800 hover:border-pink-500/50 rounded-3xl overflow-hidden shadow-xl flex flex-col group transition duration-300">
+                        <div class="relative h-52 bg-slate-800 overflow-hidden cursor-pointer" onclick="openProductModal(${p.id})">
+                            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-3 py-1 bg-slate-900/80 backdrop-blur-md text-pink-400 rounded-xl text-[10px] font-bold uppercase">${p.category}</span>
+                            <button onclick="event.stopPropagation(); toggleFavorite(${p.id})" class="absolute top-3 right-3 w-9 h-9 bg-slate-900/80 backdrop-blur-md rounded-full flex items-center justify-center text-${isFav ? 'pink-500' : 'slate-300'} hover:text-pink-500 transition">
+                                <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div class="space-y-1 cursor-pointer" onclick="openProductModal(${p.id})">
+                                <h3 class="font-bold text-white text-base line-clamp-1 group-hover:text-pink-400 transition">${p.title}</h3>
+                                <p class="text-slate-400 text-xs line-clamp-2">${p.desc}</p>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-slate-800">
+                                <span class="text-xl font-black text-emerald-400">¢${p.price.toFixed(2)}</span>
+                                <button onclick="addToCart(${p.id})" class="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center space-x-1.5">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-slate-300";
+            });
+            document.getElementById(`cat-${cat}`).className = "cat-btn px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-pink-500 text-white shadow";
+            renderShopProducts();
+        }
+
+        function filterShopProducts() {
+            renderShopProducts();
+        }
+
+        // --- PRODUCT MODAL ---
+        function openProductModal(id) {
+            currentSelectedProduct = products.find(p => p.id === id);
+            if (!currentSelectedProduct) return;
+
+            document.getElementById('modalProductImg').src = currentSelectedProduct.image;
+            document.getElementById('modalProductCat').innerText = currentSelectedProduct.category;
+            document.getElementById('modalProductTitle').innerText = currentSelectedProduct.title;
+            document.getElementById('modalProductPrice').innerText = `¢${currentSelectedProduct.price.toFixed(2)}`;
+            document.getElementById('modalProductDesc').innerText = currentSelectedProduct.desc;
+            
+            updateModalFavButton();
+            document.getElementById('productDetailModal').classList.remove('hide');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productDetailModal').classList.add('hide');
+        }
+
+        function updateModalFavButton() {
+            if (!currentSelectedProduct) return;
+            const isFav = favorites.some(f => f.id === currentSelectedProduct.id);
+            const btn = document.getElementById('modalFavBtn');
+            btn.innerHTML = `<i class="${isFav ? 'fa-solid text-pink-500' : 'fa-regular'} fa-heart"></i><span>${isFav ? 'Favorited' : 'Favorite'}</span>`;
+        }
+
+        function toggleFavoriteCurrent() {
+            if (!currentSelectedProduct) return;
+            toggleFavorite(currentSelectedProduct.id);
+            updateModalFavButton();
+        }
+
+        function addToCartFromModal() {
+            if (!currentSelectedProduct) return;
+            addToCart(currentSelectedProduct.id);
+            closeProductModal();
+        }
+
+        // --- CART & FAVORITES MANAGEMENT ---
+        function addToCart(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...prod, qty: 1 });
+            }
+            saveCart();
+            showToast(`Added ${prod.title} to cart! 🛍️`);
+        }
+
+        function toggleFavorite(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+            const idx = favorites.findIndex(f => f.id === id);
+            if (idx > -1) {
+                favorites.splice(idx, 1);
+                showToast(`Removed from favorites`);
+            } else {
+                favorites.push(prod);
+                showToast(`Added to favorites ❤️`);
+            }
+            saveFavorites();
+            renderShopProducts();
+        }
+
+        function saveCart() {
+            localStorage.setItem('billo_cart', JSON.stringify(cart));
+            const badge = document.getElementById('cartCountBadge');
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            if (totalQty > 0) {
+                badge.innerText = totalQty;
+                badge.classList.remove('hide');
+            } else {
+                badge.classList.add('hide');
+            }
+        }
+
+        function saveFavorites() {
+            localStorage.setItem('billo_favs', JSON.stringify(favorites));
+            const badge = document.getElementById('favCountBadge');
+            if (favorites.length > 0) {
+                badge.innerText = favorites.length;
+                badge.classList.remove('hide');
+            } else {
+                badge.classList.add('hide');
+            }
+        }
+
+        function openCartModal() {
+            const list = document.getElementById('cartItemsList');
+            if (cart.length === 0) {
+                list.innerHTML = `<div class="text-center py-12 text-slate-400 text-sm">Your cart is empty. Start shopping!</div>`;
+                document.getElementById('cartTotalPrice').innerText = "¢0.00";
+            } else {
+                list.innerHTML = cart.map((item, idx) => `
+                    <div class="bg-slate-800/60 p-3 rounded-2xl flex items-center justify-between gap-3">
+                        <img src="${item.image}" class="w-14 h-14 object-cover rounded-xl">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-white text-sm truncate">${item.title}</h4>
+                            <p class="text-emerald-400 font-bold text-xs">¢${item.price.toFixed(2)} x ${item.qty}</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="adjustQty(${idx}, 1)" class="w-7 h-7 bg-slate-700 hover:bg-slate-600 rounded-lg text-white font-bold flex items-center justify-center">+</button>
+                            <span class="text-sm font-bold">${item.qty}</span>
+                            <button onclick="adjustQty(${idx}, -1)" class="w-7 h-7 bg-slate-700 hover:bg-slate-600 rounded-lg text-white font-bold flex items-center justify-center">-</button>
+                        </div>
+                    </div>
+                `).join('');
+                const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                document.getElementById('cartTotalPrice').innerText = `¢${total.toFixed(2)}`;
+            }
+            document.getElementById('cartModal').classList.remove('hide');
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').classList.add('hide');
+        }
+
+        function adjustQty(idx, change) {
+            cart[idx].qty += change;
+            if (cart[idx].qty <= 0) {
+                cart.splice(idx, 1);
+            }
+            saveCart();
+            openCartModal();
+        }
+
+        function openFavoritesModal() {
+            const list = document.getElementById('favoritesItemsList');
+            if (favorites.length === 0) {
+                list.innerHTML = `<div class="text-center py-12 text-slate-400 text-sm">No favorite items saved yet.</div>`;
+            } else {
+                list.innerHTML = favorites.map(item => `
+                    <div class="bg-slate-800/60 p-3 rounded-2xl flex items-center justify-between gap-3">
+                        <img src="${item.image}" class="w-14 h-14 object-cover rounded-xl">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-white text-sm truncate">${item.title}</h4>
+                            <p class="text-emerald-400 font-bold text-xs">¢${item.price.toFixed(2)}</p>
+                        </div>
+                        <button onclick="toggleFavorite(${item.id}); openFavoritesModal();" class="text-pink-500 hover:text-slate-400 p-2"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `).join('');
+            }
+            document.getElementById('favoritesModal').classList.remove('hide');
+        }
+
+        function closeFavoritesModal() {
+            document.getElementById('favoritesModal').classList.add('hide');
+        }
+
+        // --- CHECKOUT & PAYMENT FLOW ---
+        function proceedToCheckout() {
+            if (cart.length === 0) return;
+            currentCheckoutTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            closeCartModal();
+            
+            // Reset checkout steps
+            document.getElementById('checkoutStepDetails').classList.remove('hide');
+            document.getElementById('checkoutStepPayment').classList.add('hide');
+            document.getElementById('checkoutStepSuccess').classList.add('hide');
+            
+            document.getElementById('checkoutModal').classList.remove('hide');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hide');
+        }
+
+        function saveAddressAndContinue() {
+            const name = document.getElementById('orderName').value.trim();
+            const location = document.getElementById('orderLocation').value.trim();
+            const phone = document.getElementById('orderPhone').value.trim();
+
+            if (!name || !location || !phone) {
+                alert('Please fill in all your delivery details.');
+                return;
+            }
+
+            document.getElementById('paymentPromptAmount').innerText = `¢${currentCheckoutTotal.toFixed(2)}`;
+            document.getElementById('checkoutStepDetails').classList.add('hide');
+            document.getElementById('checkoutStepPayment').classList.remove('hide');
+        }
+
+        function handleScreenshotUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                screenshotUploaded = true;
+                document.getElementById('screenshotFileName').innerText = `✅ Attached: ${file.name}`;
+                const btn = document.getElementById('submitOrderFinalBtn');
+                btn.disabled = false;
+                btn.className = "w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 text-slate-950 font-extrabold rounded-2xl shadow transition cursor-pointer";
+            }
+        }
+
+        function submitOrderFinal() {
+            if (!screenshotUploaded) return;
+
+            const name = document.getElementById('orderName').value;
+            const location = document.getElementById('orderLocation').value;
+            const phone = document.getElementById('orderPhone').value;
+
+            const newOrder = {
+                id: 'BILLO-' + Math.floor(100000 + Math.random() * 900000),
+                type: 'Shop Products',
+                items: cart.map(i => `${i.title} (x${i.qty})`).join(', '),
+                total: currentCheckoutTotal,
+                name, location, phone,
+                status: 'Pending',
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+            };
+
+            orders.unshift(newOrder);
+            localStorage.setItem('billo_orders', JSON.stringify(orders));
+
+            // Clear cart
+            cart = [];
+            saveCart();
+            screenshotUploaded = false;
+
+            document.getElementById('checkoutStepPayment').classList.add('hide');
+            document.getElementById('checkoutStepSuccess').classList.remove('hide');
+        }
+
+        function finishAndReset() {
+            closeCheckoutModal();
+            goToHome();
+        }
+
+        // --- DATA BUNDLE VENDING LOGIC ---
+        function selectNetwork(net) {
+            activeDataNetwork = net;
+            ['MTN', 'TELECEL', 'TIGO'].forEach(n => {
+                const btn = document.getElementById(`net-${n}`);
+                if (n === net) {
+                    btn.className = "net-tab py-3.5 px-4 rounded-2xl bg-gradient-to-r from-yellow-500 to-amber-600 text-slate-950 font-extrabold text-sm shadow-lg flex items-center justify-center space-x-2";
+                } else {
+                    btn.className = "net-tab py-3.5 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-extrabold text-sm flex items-center justify-center space-x-2";
+                }
+            });
+            renderDataPackages();
+        }
+
+        function renderDataPackages() {
+            const container = document.getElementById('networkPackagesContainer');
+            
+            if (activeDataNetwork === 'TIGO') {
+                container.innerHTML = `
+                    <div class="text-center py-16 space-y-4">
+                        <div class="w-16 h-16 bg-red-500/20 text-red-400 rounded-3xl flex items-center justify-center text-2xl mx-auto"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <h3 class="text-2xl font-black text-white">AT (TIGO) DATA BUNDLES</h3>
+                        <span class="inline-block px-6 py-2.5 bg-red-500/20 border border-red-500/40 text-red-400 font-extrabold text-sm rounded-2xl uppercase tracking-widest">OUT OF STOCK</span>
+                        <p class="text-slate-400 text-xs">Please check back later or select MTN or Telecel for instant delivery.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const list = activeDataNetwork === 'MTN' ? mtnBundles : telecelBundles;
+
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <h3 class="text-sm font-bold text-slate-300 uppercase tracking-widest">${activeDataNetwork} Data Packages (Instant Delivery)</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        ${list.map(pkg => `
+                            <div onclick="openDataCheckout('${pkg.gb}',${pkg.price})" class="bg-slate-800/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-500 p-4 rounded-2xl cursor-pointer transition flex flex-col justify-between space-y-2 group">
+                                <span class="text-lg font-black text-white
 
